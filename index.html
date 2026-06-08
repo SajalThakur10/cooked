@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>how cooked are you? 💀 | Gen Z Trivia Challenge</title>
+  <meta name="description"
+    content="A Y2K neon brutalist trivia game to test your fitness splits, pop culture rizz, and general knowledge facts. No cap.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Background Layer Animations -->
+  <div class="bg-mesh"></div>
+  <div class="bg-noise"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- Global Clipboard Alert -->
+  <div id="alert-popup" class="alert-popup" aria-live="polite">Copied to clipboard, bestie! 📋</div>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-container">
+      <h1 class="logo glitch-hover">cooked?</h1>
+    </div>
+
+    <!-- Controls (Sound / Theme / Score) -->
+    <div class="controls">
+      <div class="d-none">
+        <span id="score-badge" class="pill-badge score-badge">0 pts</span>
+      </div>
+      <button id="sound-toggle" class="btn-icon" aria-label="Toggle Sound" title="Toggle Sound / Mute">🔊</button>
+      <button id="theme-toggle" class="btn-icon" aria-label="Toggle Light/Dark Theme" title="Toggle Theme">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main Screen Shell -->
+  <main>
+
+    <!-- LANDING SCREEN -->
+    <section id="landing-screen" class="screen active">
+      <div class="landing-content">
+        <div>
+          <span class="hero-tag">Vibe Check 2026</span>
+          <h2 class="hero-title">
+            <span class="glow-pink">how cooked</span>
+            <span class="glow-green">are you</span>
+            <span class="glow-yellow">actually?</span>
+          </h2>
+        </div>
+
+        <!-- Category Grid -->
+        <div class="category-container">
+          <h3 class="category-title">👉 pick your poison:</h3>
+          <div class="category-grid" role="group" aria-label="Quiz Categories">
+
+            <!-- Category: Fitness & Wellness -->
+            <button class="card-category cat-fitness" data-category="fitness"
+              aria-label="Fitness and Wellness Category">
+              <span class="cat-icon" aria-hidden="true">🏋️</span>
+              <div>
+                <h4 class="cat-name">Gym & Wellness</h4>
+                <p class="cat-desc">Gym splits, supplement tea, workout myths, and muscle science.</p>
+              </div>
+            </button>
+
+            <!-- Category: Pop Culture & Entertainment -->
+            <button class="card-category cat-culture" data-category="culture"
+              aria-label="Pop Culture and Entertainment Category">
+              <span class="cat-icon" aria-hidden="true">🎬</span>
+              <div>
+                <h4 class="cat-name">Pop Culture</h4>
+                <p class="cat-desc">Trending TikTok memes, K-pop milestones, and viral celebrity rizz.</p>
+              </div>
+            </button>
+
+            <!-- Category: General Knowledge -->
+            <button class="card-category cat-knowledge" data-category="knowledge"
+              aria-label="General Knowledge Category">
+              <span class="cat-icon" aria-hidden="true">🧠</span>
+              <div>
+                <h4 class="cat-name">Twisty Facts</h4>
+                <p class="cat-desc">Surprising facts and odd general knowledge with a custom twist.</p>
+              </div>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- Landing Actions (Shuffle) -->
+        <div class="landing-actions">
+          <button id="shuffle-btn" class="btn-brutal btn-brutal-shuffle" aria-label="Shuffle category selection">
+            <span class="shuffle-icon">🌀</span> shuffle select
+          </button>
+        </div>
+
+        <!-- Keyboard Guide -->
+        <div class="keyboard-guide">
+          <span>⌨️ Navigate options with <span class="key-cap">↑</span> <span class="key-cap">↓</span> or <span
+              class="key-cap">A</span>–<span class="key-cap">D</span>, select with <span
+              class="key-cap">Enter</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ SCREEN -->
+    <section id="quiz-screen" class="screen d-none">
+
+      <!-- Top info bar -->
+      <div class="quiz-header">
+        <span id="q-progress-pill" class="pill-badge">01 / 10</span>
+
+        <!-- SVG countdown timer -->
+        <div class="timer-container" aria-live="polite">
+          <svg class="timer-svg" viewBox="0 0 70 70">
+            <circle class="timer-circle-bg" cx="35" cy="35" r="30"></circle>
+            <circle id="timer-circle-progress" class="timer-circle-progress" cx="35" cy="35" r="30"></circle>
+          </svg>
+          <span id="timer-text" class="timer-text">15</span>
+        </div>
+      </div>
+
+      <!-- Glowing Progress Bar -->
+      <div class="progress-bar-container" aria-label="Quiz completion progress">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+
+      <!-- Question Card Slot -->
+      <div class="question-wrapper">
+        <div id="card-question" class="card-question">
+          <span id="q-category-tag" class="q-category-tag">category</span>
+          <h3 id="q-text" class="q-text">Is this the ultimate question card layout?</h3>
+        </div>
+      </div>
+
+      <!-- Option Buttons Grid -->
+      <div id="answers-grid" class="answers-grid" role="listbox" aria-label="Quiz answers list">
+        <!-- Will be dynamically populated in app.js -->
+      </div>
+    </section>
+
+    <!-- RESULTS SCREEN -->
+    <section id="results-screen" class="screen d-none">
+      <div class="results-content">
+        <div>
+          <span class="hero-tag">vibe check completed</span>
+          <h2 class="hero-title"><span class="glow-pink">how cooked?</span></h2>
+        </div>
+
+        <!-- Score Presentation Card -->
+        <div class="score-display">
+          <span id="score-big" class="score-big">0</span>
+          <span class="score-sub">out of 10</span>
+        </div>
+
+        <!-- Dynamic personality tag -->
+        <div>
+          <span id="verdict-tag" class="verdict-tag">Vibe verdict</span>
+        </div>
+
+        <h3 id="personality-verdict" class="personality-verdict">bestie you were NOT ready 💀</h3>
+
+        <!-- Result Control Actions -->
+        <div class="results-actions">
+          <button id="play-again-btn" class="btn-brutal" aria-label="Play again with current category">
+            🔄 replay
+          </button>
+          <button id="switch-category-btn" class="btn-brutal" style="background: var(--neon-yellow);"
+            aria-label="Switch to category menu">
+            📂 categories
+          </button>
+          <button id="share-btn" class="btn-brutal" style="background: var(--neon-green);"
+            aria-label="Copy results to share">
+            🔗 share score
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fun Fact Popup Toast -->
+  <div id="toast-container" class="toast-container" aria-live="assertive">
+    <div class="toast-body">
+      <span id="toast-icon-slot" class="toast-icon">💡</span>
+      <div class="toast-content">
+        <span class="toast-title">the tea:</span>
+        <p id="toast-text" class="toast-text">Here's some fun fact about the question to make you less cooked next time!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CDN scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Main Script -->
+  <script src="app.js"></script>
+</body>
+
+</html>
